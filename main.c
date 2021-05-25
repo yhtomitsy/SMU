@@ -544,8 +544,12 @@ void uart_event_handle(app_uart_evt_t * p_event)
     static uint8_t data_array[BLE_NUS_MAX_DATA_LEN];
     static uint8_t index = 0;
     uint32_t       err_code;
-		static int weight = 0;
-		static uint8_t data[] = {'x', 'x', 0, 0, 0, 0, 0, 0, 0, '\n', '\r'};
+		int wholeNum = 0;
+		int decimal = 0;
+		uint8_t dec = 0;
+	  uint8_t decNum = 0;
+	
+		static uint8_t data[] = {'x', 'x', 0, 0, 0, 0, 0, 0, 0, 0, '\n', '\r'};
 		data[2] = hours;
 		data[3] = minutes;
 		data[4] = date;
@@ -562,16 +566,33 @@ void uart_event_handle(app_uart_evt_t * p_event)
             {
                 if (index > 1)
                 {
-                    weight = 0;
+                    wholeNum = 0;
+										decimal = 0;
 										for(uint8_t i = 0; i < index - 1; i++)
 										{
 												NRF_LOG_INFO("%d", data_array[i]);
-												weight = (weight * 10) + (data_array[i] - '0');
+												if(data_array[i] == '.')
+												{
+														dec = 1;
+														i++;
+												}
+											
+												if(dec)
+												{
+														decimal = (decimal * 10) + (data_array[i] - '0');
+												}
+												else
+												{
+														wholeNum = (wholeNum * 10) + (data_array[i] - '0');
+												}
 										}
-										NRF_LOG_INFO("Weight: %d  %d", weight >> 8, weight & 0xff);
 										
-										data[7] = weight >>8;
-										data[8] = weight & 0xff;
+										
+										NRF_LOG_INFO("Weight: %d  %d  %d", wholeNum >> 8, wholeNum & 0xff, decimal);
+										
+										data[7] = wholeNum >>8;
+										data[8] = wholeNum & 0xff;
+										data[9] = decimal;
                     do
                     {
                         uint16_t length = (uint16_t)sizeof(data);

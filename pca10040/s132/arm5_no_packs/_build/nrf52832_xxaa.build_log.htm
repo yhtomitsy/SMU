@@ -42,15 +42,17 @@ compiling main.c...
   static void timer_initialize();
 ..\..\..\libs\Keypad.h(59): warning:  #1295-D: Deprecated declaration timer_initialize - give arg types
   static void timer_initialize();
-..\..\..\main.c(775): warning:  #177-D: variable "sendArray" was declared but never referenced
+..\..\..\main.c(550): warning:  #177-D: variable "decNum" was declared but never referenced
+  	  uint8_t decNum = 0;
+..\..\..\main.c(797): warning:  #177-D: variable "sendArray" was declared but never referenced
   		static uint8_t sendArray[] = "testing1";
-..\..\..\main.c(672): warning:  #177-D: function "buttons_leds_init" was declared but never referenced
+..\..\..\main.c(694): warning:  #177-D: function "buttons_leds_init" was declared but never referenced
   static void buttons_leds_init(bool * p_erase_bonds)
-..\..\..\main.c: 9 warnings, 0 errors
+..\..\..\main.c: 10 warnings, 0 errors
 linking...
-Program Size: Code=34180 RO-data=5664 RW-data=452 ZI-data=14316  
+Program Size: Code=34272 RO-data=5652 RW-data=444 ZI-data=14316  
 FromELF: creating hex file...
-".\_build\nrf52832_xxaa.axf" - 0 Error(s), 9 Warning(s).
+".\_build\nrf52832_xxaa.axf" - 0 Error(s), 10 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -80,7 +82,7 @@ Package Vendor: NordicSemiconductor
       Source file:   Device\Source\system_nrf52.c
       Source file:   Device\Source\arm\arm_startup_nrf52.s
       Include file:  Device\Include\system_nrf52.h
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
